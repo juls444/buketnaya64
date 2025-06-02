@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Товары категории</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!--/metatextblock-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+    <!-- Assets -->
+    <link rel="stylesheet" href="/css/grid-3.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="/css/blocks-page61337267.min.css" type="text/css" media="all"
+        onerror="this.loaderr='y';" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/animation-2.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="/css/popup-1.1.min.css" type="text/css" media="print" onload="this.media='all';"
+        onerror="this.loaderr='y';" />
+    <noscript>
+        <link rel="stylesheet" href="/css/popup-1.1.min.css" type="text/css" media="all" /></noscript>
+    <link rel="stylesheet" href="/css/slds-1.4.min.css" type="text/css" media="print" onload="this.media='all';"
+        onerror="this.loaderr='y';" />
+    <noscript>
+        <link rel="stylesheet" href="/css/slds-1.4.min.css" type="text/css" media="all" /></noscript>
+    <link rel="stylesheet" href="/css/catalog-1.1.min.css" type="text/css" media="print" onload="this.media='all';"
+        onerror="this.loaderr='y';" />
+    <noscript>
+        <link rel="stylesheet" href="/css/catalog-1.1.min.css" type="text/css" media="all" /></noscript>
+    <link rel="stylesheet" href="/css/forms-1.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="/css/cards-1.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="/css/cart-1.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="/css/zoom-2.0.min.css" type="text/css" media="print" onload="this.media='all';"
+        onerror="this.loaderr='y';" /> <noscript>
+        <link rel="stylesheet" href="/css/zoom-2.0.min.css" type="text/css" media="all" /></noscript>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #fcf3f3;
+        }
+
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            margin: 0 auto;
+            width: 50%;
+            flex-direction: column;
+        }
+        a {
+            margin-bottom: 5px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        .button-container a,
+        .button-container button {
+            margin-bottom: 5px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .button:hover {
+            background-color: #e0e0e0;
+        }
+
+        img {
+            width: 100px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+
+            th,
+            td {
+                width: auto;
+                text-align: left;
+            }
+
+            th {
+                background-color: #f2f2f2;
+            }
+
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            .button-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .button {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+
+
+        <h1 class="text-center mt-3" field="title">Товары категории
+            <% if (products.length > 0) { %> "<%= products[0].category_name %>"<% } else { %>
+            <% } %></h1>
+        <% if (products.length > 0) { %>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Изображение</th>
+                    <th>Наименование</th>
+                    <th>Цена</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% products.forEach(product => { %>
+                <tr>
+                    <td class="images">
+                        <% if (product.images) { %>
+                        <% console.log("product.images:", product.images); %>
+                        <% const images = JSON.parse(product.images); %>
+                        <% console.log("images:", images); %>
+                        <% if (images.length > 0) { %>
+                        <img src="/<%= images[0] %>" alt="Изображение товара">
+                        <% } %>
+                        <% } %>
+                    </td>
+                    <td><%= product.name %></td>
+                    <td><%= product.price %></td>
+                    <td>
+                        <div class="button-container">
+                            <a href="/products/<%= product.id %>/edit" class="btn btn-primary btn-sm">Редактировать</a>
+                            <form action="/products/<%= product.id %>/delete" method="post" class="d-inline">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="category_id" value="<%= category_id %>">
+                                <button type="submit" class="btn btn-danger btn-sm">Удалить</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <% } else { %>
+        <p>Нет товаров в этой категории.</p>
+        <% } %>
+            
+        <div class="buttons mt-3">
+            <a href="/products/new" class="button" style="text-decoration: none; color: #333;">Добавить товар</a>
+            <a href="/categories" class="button" style="text-decoration: none; color: #333;">Категории</a>
+            <a href="/admin" class="button" style="text-decoration: none; color: #333;">Панель администратора</a>
+            <a href="/" class="button" style="text-decoration: none; color: #333;">Главная</a>
+        </div>
+    </div>
+</body>
+
+</html>

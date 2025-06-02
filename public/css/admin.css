@@ -1,0 +1,107 @@
+body {
+    font-family: 'Manrope', sans-serif;
+    margin: 0;
+    padding: 0;
+    /* background-color: #f2c9c9; */
+    background-color: #fcf3f3;
+}
+
+header {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+h1, h2, h3{
+    font-family: 'Manrope', sans-serif;
+    font-weight: bold; /* если вы выбрали жирный стиль */
+}
+h2 {
+    font-size: 20px;
+}
+
+input {
+    font-size: 20px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 90%;
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    color: #333;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.button:hover {
+    background-color: #e0e0e0;
+}
+.buttons {
+  display: flex;
+  margin: 0 auto;
+  width: 50%;
+  flex-direction: column;
+}
+/* EDIT */
+.form_edit {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 500px;
+  }
+  
+  .form-group, .form-group textarea{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px; 
+    font-size: 20px;
+  }
+  
+  .form-group label {
+    margin-bottom: 5px;
+  }
+  
+  .form-group input, .form-group textarea {
+    min-width: 500px; 
+    /* min-height: 40px; */
+    text-align: center; 
+    font-family: 'Manrope', sans-serif;
+  }
+  
+  .form-group button{
+/*   
+    min-height: 50px;
+    text-align: center; 
+    font-size: 20px; */
+  }
+  .categories-container {
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+  }
+  .categories {
+    min-width: 200px;
+    max-width: none;
+  }
+  a {
+    text-decoration: none;
+  }

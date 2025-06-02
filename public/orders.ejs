@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Список заказов</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <!--/metatextblock-->
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+  <!-- Assets -->
+  <link rel="stylesheet" href="/css/grid-3.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+  <link rel="stylesheet" href="/css/blocks-page61337267.min.css" type="text/css" media="all"
+    onerror="this.loaderr='y';" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/css/animation-2.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+  <link rel="stylesheet" href="/css/popup-1.1.min.css" type="text/css" media="print" onload="this.media='all';"
+    onerror="this.loaderr='y';" />
+  <noscript>
+    <link rel="stylesheet" href="/css/popup-1.1.min.css" type="text/css" media="all" /></noscript>
+  <link rel="stylesheet" href="/css/slds-1.4.min.css" type="text/css" media="print" onload="this.media='all';"
+    onerror="this.loaderr='y';" />
+  <noscript>
+    <link rel="stylesheet" href="/css/slds-1.4.min.css" type="text/css" media="all" /></noscript>
+  <link rel="stylesheet" href="/css/catalog-1.1.min.css" type="text/css" media="print" onload="this.media='all';"
+    onerror="this.loaderr='y';" />
+  <noscript>
+    <link rel="stylesheet" href="/css/catalog-1.1.min.css" type="text/css" media="all" /></noscript>
+  <link rel="stylesheet" href="/css/forms-1.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+  <link rel="stylesheet" href="/css/cards-1.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+  <link rel="stylesheet" href="/css/cart-1.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+  <link rel="stylesheet" href="/css/zoom-2.0.min.css" type="text/css" media="print" onload="this.media='all';"
+    onerror="this.loaderr='y';" /> <noscript>
+    <link rel="stylesheet" href="/css/zoom-2.0.min.css" type="text/css" media="all" /></noscript>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <style>
+    body {
+      background-color: #fcf3f3;
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    #ordersTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+
+    #ordersTable td {
+      word-wrap: break-word;
+    }
+
+    .table-responsive {
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      margin: 0 auto;
+      width: 50%;
+      flex-direction: column;
+    }
+
+
+    .tel {
+      min-width: 120px;
+    }
+
+    .house {
+      max-width: 50px;
+    }
+
+    .appart {
+      max-width: 70px;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .functional {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .excl {
+      color: green;
+    }
+
+    .order-status-select {
+      width: 100%;
+      min-width: 140px;
+    }
+
+    .container {
+      padding-right: 0px; 
+     padding-left: 0px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+
+    <h1 class="text-center mt-3" field="title">Список заказов</h1>
+    <div class="functional row mb-3 d-flex align-items-end">
+      <div class="col-md-4">
+        <label for="sortStatus">Сортировать по статусу:</label>
+        <select class="form-control" id="sortStatus">
+          <option value="Все">Все</option>
+          <option value="Новый">Новый</option>
+          <option value="Выполняется">Выполняется</option>
+          <option value="Выполнен">Выполнен</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <button id="sortOrdersButton" class="btn btn-primary mt-4">Сортировать</button>
+      </div>
+      <div class="col-md-4 text-right">
+        <a href="/export-excel" class="btn btn-success mt-4">Экспорт в Excel</a>
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table id="ordersTable" class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th class="tel">Телефон</th>
+            <th>Способ доставки</th>
+            <th>Улица</th>
+            <th class="house">Дом</th>
+            <th class="appart">Кв.</th>
+            <th>Продукты</th>
+            <th>Сумма заказа</th>
+            <th>Дата создания</th>
+            <th>Статус заказа</th>
+            <th>Действия</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <% orders.forEach(order => { %>
+          <tr>
+            <% console.log("Current order:", order); %>
+            <td><%= order.id %></td>
+            <td><%= order.name %></td>
+            <td><%= order.phone %></td>
+            <td><%= order.deliveryMethod %></td>
+            <td><%= (order.street == null || order.street === '') ? '' : order.street %></td>
+            <td><%= order.house === null ? '' : order.house %></td>
+            <td><%= order.apartment === null ? '' : order.apartment %></td>
+
+            <td><%= order.product_names %></td>
+            <td><%= order.total_price %></td>
+            <td><%= order.created_at %></td>
+            <td>
+              <select class="order-status form-control order-status-select" data-order-id="<%= order.id %>">
+                <option value="Новый" <%= order.status === 'Новый' ? 'selected' : '' %>>Новый</option>
+                <option value="Выполняется" <%= order.status === 'Выполняется' ? 'selected' : '' %>>Выполняется</option>
+                <option value="Выполнен" <%= order.status === 'Выполнен' ? 'selected' : '' %>>Выполнен</option>
+              </select>
+            </td>
+            <td>
+              <button type="submit" class="button delete-order btn btn-danger"
+                data-order-id="<%= order.id %>">Удалить</button>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center" id="pagination">
+        <!-- Элементы пагинации -->
+      </ul>
+    </nav>
+    <div class="buttons mt-3">
+      <a href="/admin" class="button" style="text-decoration: none; color: #333;">Панель администратора</a>
+      <a href="/" class="button" style="text-decoration: none; color: #333;">Главная</a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const orderTable = document.querySelector('table');
+        orderTable.addEventListener('change', async (event) => {
+          if (event.target.classList.contains('order-status')) {
+            const orderId = event.target.dataset.orderId;
+            const newStatus = event.target.value;
+
+            try {
+              const response = await fetch(`/api/order/${orderId}/status`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  status: newStatus
+                })
+              });
+
+              if (response.ok) {
+                console.log(`Статус заказа ${orderId} успешно обновлен на ${newStatus}`);
+              } else {
+                console.error(`Ошибка при обновлении статуса заказа ${orderId}`);
+                alert('Ошибка при обновлении статуса заказа');
+              }
+            } catch (error) {
+              console.error('Ошибка сети при обновлении статуса заказа:', error);
+              alert('Ошибка сети при обновлении статуса заказа');
+            }
+          }
+        });
+
+        orderTable.addEventListener('click', async (event) => {
+          if (event.target.classList.contains('delete-order')) {
+            const orderId = event.target.dataset.orderId;
+
+            if (confirm('Вы уверены, что хотите удалить этот заказ?')) {
+              try {
+                const response = await fetch(`/api/order/${orderId}`, {
+                  method: 'DELETE'
+                });
+
+                if (response.ok) {
+                  console.log(`Заказ ${orderId} успешно удален`);
+                  window.location.reload();
+                } else {
+                  console.error(`Ошибка при удалении заказа ${orderId}`);
+                  alert('Ошибка при удалении заказа');
+                }
+              } catch (error) {
+                console.error('Ошибка сети при удалении заказа:', error);
+                alert('Ошибка сети при удалении заказа');
+              }
+            }
+          }
+        });
+
+        const sortOrdersButton = document.getElementById('sortOrdersButton');
+        const sortStatusSelect = document.getElementById('sortStatus');
+        const ordersTable = document.getElementById('ordersTable');
+        const tableBody = ordersTable.querySelector('tbody');
+
+        let allOrders = [];
+
+        const getAllOrdersData = () => {
+          allOrders = Array.from(tableBody.querySelectorAll('tr')).map(row => {
+            const id = row.cells[0].textContent; 
+            const name = row.cells[1].textContent;
+            const statusSelect = row.querySelector('.order-status');
+            const status = statusSelect.value;
+            return {
+              id,
+              name,
+              status,
+              row
+            };
+          });
+        };
+
+        getAllOrdersData();
+
+        // отображение заказов в таблице
+        const renderOrders = (ordersToRender) => {
+          tableBody.innerHTML = '';
+          ordersToRender.forEach(order => {
+            tableBody.appendChild(order.row);
+          });
+        };
+
+        sortOrdersButton.addEventListener('click', () => {
+          const selectedStatus = sortStatusSelect.value;
+
+          let filteredOrders = [...allOrders];
+
+          if (selectedStatus !== 'Все') {
+            filteredOrders = allOrders.filter(order => order.status === selectedStatus);
+          }
+
+          renderOrders(filteredOrders);
+        });
+
+        // обновление статуса заказа в allOrders
+        const updateOrderStatus = (orderId, newStatus) => {
+          const orderToUpdate = allOrders.find(order => order.id === orderId);
+          if (orderToUpdate) {
+            orderToUpdate.status = newStatus;
+          }
+        };
+
+        const statusSelects = tableBody.querySelectorAll('.order-status');
+        statusSelects.forEach(select => {
+          select.addEventListener('change', (event) => {
+            const orderId = event.target.closest('tr').cells[0].textContent; 
+            const newStatus = select.value; 
+            updateOrderStatus(orderId, newStatus); 
+
+            sortOrdersButton.click();
+          });
+        });
+      });
+      $(document).ready(function() {
+        const orders = <%- JSON.stringify(orders) %>; // orders из EJS в JavaScript
+
+        let itemsPerPage = 10;
+        let currentPage = 1;
+        let totalPages = Math.ceil(orders.length / itemsPerPage);
+
+        function displayOrders(page) {
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageOrders = orders.slice(startIndex, endIndex);
+
+            let tableRows = '';
+            pageOrders.forEach(order => {
+                tableRows += `
+                    <tr>
+                        <td>${order.id}</td>
+                        <td>${order.name}</td>
+                        <td>${order.phone}</td>
+                        <td>${order.deliveryMethod}</td>
+                        <td>${order.street}</td>
+                        <td>${order.house}</td>
+                        <td>${order.apartment}</td>
+                        <td>${order.product_names}</td>
+                        <td>${order.total_price}</td>
+                        <td>${order.created_at}</td>
+                        <td>
+                            <select class="form-control order-status-select" data-order-id="${order.id}">
+                                <option value="Новый" ${order.status === 'Новый' ? 'selected' : ''}>Новый</option>
+                                <option value="Выполняется" ${order.status === 'Выполняется' ? 'selected' : ''}>Выполняется</option>
+                                <option value="Выполнен" ${order.status === 'Выполнен' ? 'selected' : ''}>Выполнен</option>
+                            </select>
+                        </td>
+                        <td><button class="btn btn-danger">Удалить</button></td>
+                    </tr>
+                `;
+            });
+
+            $('#tableBody').html(tableRows);
+        }
+
+        function setupPagination() {
+            $('#pagination').empty();
+
+            if (currentPage > 1) {
+                $('#pagination').append(`<li class="page-item"><a class="page-link" href="#" data-page="${currentPage - 1}">Предыдущая</a></li>`);
+            }
+
+            for (let i = 1; i <= totalPages; i++) {
+                const activeClass = i === currentPage ? 'active' : '';
+                $('#pagination').append(`<li class="page-item ${activeClass}"><a class="page-link" href="#" data-page="${i}">${i}</a></li>`);
+            }
+
+            if (currentPage < totalPages) {
+                $('#pagination').append(`<li class="page-item"><a class="page-link" href="#" data-page="${currentPage + 1}">Следующая</a></li>`);
+            }
+        }
+
+        // изменение количества элементов на странице
+        $('#itemsPerPage').change(function() {
+            itemsPerPage = parseInt($(this).val());
+            totalPages = Math.ceil(orders.length / itemsPerPage);
+            currentPage = 1; // Возвращаемся на первую страницу
+            displayOrders(currentPage);
+            setupPagination();
+        });
+
+        // клик на номер страницы
+        $('#pagination').on('click', 'a.page-link', function(event) {
+            event.preventDefault();
+            const page = parseInt($(this).data('page'));
+            currentPage = page;
+            displayOrders(currentPage);
+            setupPagination();
+        });
+
+        displayOrders(currentPage);
+        setupPagination();
+    });
+  
+    </script>
+
+</body>
+
+</html>

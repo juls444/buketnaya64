@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Редактирование товара</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <!--/metatextblock-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+    <!-- Assets -->
+    <link rel="stylesheet" href="/css/grid-3.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="/css/blocks-page61337267.min.css" type="text/css" media="all"
+        onerror="this.loaderr='y';" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&subset=latin,cyrillic"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/animation-2.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="/css/popup-1.1.min.css" type="text/css" media="print" onload="this.media='all';"
+        onerror="this.loaderr='y';" />
+    <noscript>
+        <link rel="stylesheet" href="/css/popup-1.1.min.css" type="text/css" media="all" /></noscript>
+    <link rel="stylesheet" href="/css/slds-1.4.min.css" type="text/css" media="print" onload="this.media='all';"
+        onerror="this.loaderr='y';" />
+    <noscript>
+        <link rel="stylesheet" href="/css/slds-1.4.min.css" type="text/css" media="all" /></noscript>
+    <link rel="stylesheet" href="/css/catalog-1.1.min.css" type="text/css" media="print" onload="this.media='all';"
+        onerror="this.loaderr='y';" />
+    <noscript>
+        <link rel="stylesheet" href="/css/catalog-1.1.min.css" type="text/css" media="all" /></noscript>
+    <link rel="stylesheet" href="/css/forms-1.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="/css/cards-1.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="/css/cart-1.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';" />
+    <link rel="stylesheet" href="/css/zoom-2.0.min.css" type="text/css" media="print" onload="this.media='all';"
+        onerror="this.loaderr='y';" /> <noscript>
+        <link rel="stylesheet" href="/css/zoom-2.0.min.css" type="text/css" media="all" /></noscript>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="t795__title t-title t-title_xs t-align_center t-margin_auto" field="title">Редактирование товара</h1>
+    <form action="/products/<%= product.id %>" method="post" class="form-group" enctype="multipart/form-data">
+        <label for="category_id">ID категории:</label>
+        <input type="number" id="category_id" name="category_id" value="<%= product.category_id %>"><br>
+
+        <label for="name">Название:</label>
+        <input type="text" id="name" name="name" rows="6" cols="50" value="<%= product.name %>"><br>
+
+        <label for="description">Описание:</label>
+        <textarea id="description" name="description" rows="6" cols="50"><%= product.description %></textarea><br>
+
+        <label for="price">Цена:</label>
+        <input type="number" step="0.01" id="price" name="price" value="<%= product.price %>"><br>
+
+        <div class="form-group">
+            <label for="image">Изображение:</label><br>
+            <input type="file" id="images" name="images" accept="image/*" multiple>
+
+            <input type="hidden" name="existingImage" value='<%= JSON.stringify(product.images) %>'>
+
+            <% if (product.images.length > 0) { %>
+            <div class="existing-images">
+                <% product.images.forEach(function(image) { %>
+                <img src="/<%= image %>" alt="Изображение товара"
+                    style="max-width: 100px; max-height: 100px; margin-top: 10px;">
+                <% }); %>
+            </div>
+            <% } %>
+
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="button">Сохранить</button>
+            <a href="/products/<%= product.category_id %>" class="button">Отмена</a>
+        </div>
+    </form>
+
+</body>
+
+</html>
